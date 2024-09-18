@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Late Work Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        label { display: block; margin-top: 10px; }
+        input, button { margin-top: 5px; }
+        #result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Late Work Calculator</h1>
+    <form id="calculator-form">
+        <label for="dueDate">Due Date (e.g., Sep 9):</label>
+        <input type="text" id="dueDate" required>
+
+        <label for="submissionDate">Submission Date (e.g., Sep 19):</label>
+        <input type="text" id="submissionDate" required>
+
+        <label for="pointsPossible">Points Possible:</label>
+        <input type="number" id="pointsPossible" required>
+
+        <label for="studentScore">Student Score:</label>
+        <input type="number" id="studentScore" required>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateFinalGrade(dueDate, submissionDate, pointsPossible, studentScore) {
+            const currentYear = new Date().getFullYear();
+            const dueDateObj = new Date(`${dueDate}, ${currentYear}`);
+            const submissionDateObj = new Date(`${submissionDate}, ${currentYear}`);
+            
+            const daysLate = Math.floor((submissionDateObj - dueDateObj) / (1000 * 60 * 60 * 24));
+            const weeksLate = Math.floor(daysLate / 7);
+            
+            const penaltyPercentage = weeksLate * 5 / 100;
+            const penaltyPoints = penaltyPercentage * pointsPossible;
+            
+            const finalPoints = Math.max(0, studentScore - penaltyPoints);
+            
+            return {
+                weeksLate,
+                penaltyPercentage: penaltyPercentage * 100,
+                penaltyPoints,
+                adjustedMaxPoints: pointsPossible - penaltyPoints,
+                finalPoints
+            };
+        }
+
+        document.getElementById('calculator-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const dueDate = document.getElementById('dueDate').value;
+            const submissionDate = document.getElementById('submissionDate').value;
+            const pointsPossible = parseFloat(document.getElementById('pointsPossible').value);
+            const studentScore = parseFloat(document.getElementById('studentScore').value);
+
+            const result = calculateFinalGrade(dueDate, submissionDate, pointsPossible, studentScore);
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h2>Results:</h2>
+                <p>Weeks Late: ${result.weeksLate}</p>
+                <p>Penalty Percentage: ${result.penaltyPercentage.toFixed(2)}%</p>
+                <p>Penalty Points: ${result.penaltyPoints.toFixed(2)}</p>
+                <p>Adjusted Max Points: ${result.adjustedMaxPoints.toFixed(2)}</p>
+                <p>Final Points: ${result.finalPoints.toFixed(2)}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
