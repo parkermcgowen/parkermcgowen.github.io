@@ -16,7 +16,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         h1 {
             font-size: 24px;
@@ -45,16 +45,18 @@
         .social-links img {
             width: 32px;
             height: 32px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, filter 0.3s;
+            filter: brightness(0) invert(1); /* This will make the logos white */
         }
         .social-links img:hover {
             transform: scale(1.1);
+            filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(187, 134, 252, 0.8));
         }
     </style>
 </head>
 <body>
     <h1>parker mcgowen</h1>
-    <p>current student at University of Arkansas majoring in data science</p>
+    <p>current student at University of  Arkansas majoring in data science</p>
     <p>also a <a href="ta-folder/calculator.html" class="ta-link">TA</a></p>
     <p>here's some of my things</p>
     
