@@ -1,1 +1,1 @@
-personal site that I am using to learn git and other fun and exciting things :)
+personal site that is in no way professional, as i am not a professional
