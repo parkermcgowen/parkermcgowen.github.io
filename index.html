@@ -36,12 +36,35 @@
             color: #3700b3; 
             text-decoration: underline;
         }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .social-links img {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.3s;
+        }
+        .social-links img:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
-    <body>
-        <h1>parker mcgowen</h1>
-        <p>current student at University of Arkansas majoring in data science</p>
-        <p>also a <a href="ta-folder/calculator.html" class="ta-link">TA</a></p>
-        <p>here's where you can find me</p>
-    </body>
+<body>
+    <h1>parker mcgowen</h1>
+    <p>current student at University of Arkansas majoring in data science</p>
+    <p>also a <a href="ta-folder/calculator.html" class="ta-link">TA</a></p>
+    <p>here's some of my things</p>
+    
+    <div class="social-links">
+        <a href="https://steamcommunity.com/id/yourusername" target="_blank">
+            <img src="images/steam.png" alt="Steam">
+        </a>
+        <a href="https://www.youtube.com/channel/your-channel-id" target="_blank">
+            <img src="images/youtube.png" alt="YouTube">
+        </a>
+    </div>
+</body>
 </html>
